@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tu Restaurante</title>
+    <!-- Archivos CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
+    ></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <h1>Bienvenidos a Tu Restaurante</h1>
+        <p>Una experiencia culinaria única</p>
+        <a href="#reservas" class="btn">Reservar Mesa</a>
+      </div>
+    </section>
+
+    <!-- Menú -->
+    <div id="menu"></div>
+
+    <!-- AR Section -->
+    <section class="section">
+      <h2 class="section-title">Explora nuestro menú en AR</h2>
+      <p style="text-align: center">Haz clic para ver en realidad aumentada.</p>
+      <div id="3d-container"></div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script src="js/utils/device-detection.js"></script>
+    <script src="js/utils/image-loader.js"></script>
+    <script src="js/ar.js"></script>
+    <script src="js/three.js"></script>
+    <script>
+      // Cargar componentes dinámicamente
+      fetch("components/header.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("header").innerHTML = html));
+      fetch("components/menu.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("menu").innerHTML = html));
+      fetch("components/footer.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("footer").innerHTML = html));
+    </script>
+  </body>
+</html>

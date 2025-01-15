@@ -1,0 +1,15 @@
+@import 'base.css';
+@import 'layout.css';
+@import 'components.css';
+@import 'pages.css';
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+}
