@@ -38,9 +38,49 @@
       <div id="3d-container"></div>
     </section>
 
+    <section class="testimonials" id="testimonios">
+      <h2 class="section-title">Testimonios</h2>
+      <div class="testimonial">
+        <p>"La mejor experiencia culinaria, ¡definitivamente volveremos!"</p>
+        <span>- Cliente satisfecho</span>
+      </div>
+      <!-- Más testimonios -->
+    </section>
+
+    <section class="gallery" id="galeria">
+      <h2 class="section-title">Galería</h2>
+      <div class="gallery-container">
+        <img src="images/pizza2.jpg" alt="Plato 1" />
+        <img src="images/pizza2.jpg" alt="Plato 2" />
+        <img src="images/pizza2.jpg" alt="Interior del restaurante" />
+      </div>
+    </section>
+
+    <!-- Reservas -->
+    <div id="reservas"></div>
+
+    <section class="membership" id="membresia">
+      <h2 class="section-title">Únete a nuestro Programa de Membresías</h2>
+      <form class="membership-form">
+        <input type="text" placeholder="Nombre completo" required />
+        <input type="email" placeholder="Correo electrónico" required />
+        <input type="password" placeholder="Contraseña" required />
+        <button type="submit" class="btn">Registrarse</button>
+      </form>
+    </section>
+
+    <section class="login" id="inicio-sesion">
+      <h2 class="section-title">Inicia Sesión</h2>
+      <form class="login-form">
+        <input type="email" placeholder="Correo electrónico" required />
+        <input type="password" placeholder="Contraseña" required />
+        <button type="submit" class="btn">Iniciar Sesión</button>
+      </form>
+    </section>
+    <!--Ubicacion-->
+    <div id="ubicacion"></div>
     <!-- Footer -->
     <div id="footer"></div>
-
     <!-- Scripts -->
     <script src="js/utils/device-detection.js"></script>
     <script src="js/utils/image-loader.js"></script>
@@ -57,6 +97,14 @@
       fetch("components/footer.html")
         .then((res) => res.text())
         .then((html) => (document.getElementById("footer").innerHTML = html));
+      fetch("components/reservas.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("reservas").innerHTML = html));
+      fetch("components/ubicacion.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("ubicacion").innerHTML = html)
+        );
     </script>
   </body>
 </html>
