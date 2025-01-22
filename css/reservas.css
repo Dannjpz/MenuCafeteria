@@ -1,0 +1,6 @@
+/* Formulario de reservas */
+.reservation-form {
+    max-width: min(600px, 90%);
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem);
+  }

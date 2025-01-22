@@ -2,10 +2,27 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
     <title>Tu Restaurante</title>
     <!-- Archivos CSS -->
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/membership.css">
+    <link rel="stylesheet" href="css/portada.css" />
+    <link rel="stylesheet" href="css/reservas.css" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/testimonials.css" />
+    <link rel="stylesheet" href="css/ubicacion.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
     <script
       type="module"
       src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
@@ -16,90 +33,60 @@
     ></script>
   </head>
   <body>
-    <!-- Header -->
+    <div id="portada"></div>
     <div id="header"></div>
-
-    <!-- Hero Section -->
-    <section class="hero" id="inicio">
-      <div class="hero-content">
-        <h1>Bienvenidos a Tu Restaurante</h1>
-        <p>Una experiencia culinaria única</p>
-        <a href="#reservas" class="btn">Reservar Mesa</a>
-      </div>
-    </section>
-
-    <!-- Menú -->
-    <div id="menu"></div>
-
-    <!-- AR Section -->
-    <section class="section">
+    <div id="inicio"></div>
+    <section class="section" id="menu">
       <h2 class="section-title">Explora nuestro menú en AR</h2>
       <p style="text-align: center">Haz clic para ver en realidad aumentada.</p>
       <div id="3d-container"></div>
     </section>
-
-    <section class="testimonials" id="testimonios">
-      <h2 class="section-title">Testimonios</h2>
-      <div class="testimonial">
-        <p>"La mejor experiencia culinaria, ¡definitivamente volveremos!"</p>
-        <span>- Cliente satisfecho</span>
-      </div>
-      <!-- Más testimonios -->
-    </section>
-
-    <section class="gallery" id="galeria">
-      <h2 class="section-title">Galería</h2>
-      <div class="gallery-container">
-        <img src="images/pizza2.jpg" alt="Plato 1" />
-        <img src="images/pizza2.jpg" alt="Plato 2" />
-        <img src="images/pizza2.jpg" alt="Interior del restaurante" />
-      </div>
-    </section>
-
-    <!-- Reservas -->
+    <div id="testimonios"></div>
+    <div id="galeria"></div>
     <div id="reservas"></div>
-
-    <section class="membership" id="membresia">
-      <h2 class="section-title">Únete a nuestro Programa de Membresías</h2>
-      <form class="membership-form">
-        <input type="text" placeholder="Nombre completo" required />
-        <input type="email" placeholder="Correo electrónico" required />
-        <input type="password" placeholder="Contraseña" required />
-        <button type="submit" class="btn">Registrarse</button>
-      </form>
-    </section>
-
-    <section class="login" id="inicio-sesion">
-      <h2 class="section-title">Inicia Sesión</h2>
-      <form class="login-form">
-        <input type="email" placeholder="Correo electrónico" required />
-        <input type="password" placeholder="Contraseña" required />
-        <button type="submit" class="btn">Iniciar Sesión</button>
-      </form>
-    </section>
-    <!--Ubicacion-->
+    <div id="membership"></div>
+    <div id="inicio-sesion"></div>
     <div id="ubicacion"></div>
-    <!-- Footer -->
     <div id="footer"></div>
     <!-- Scripts -->
-    <script src="js/utils/device-detection.js"></script>
-    <script src="js/utils/image-loader.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/ar.js"></script>
     <script src="js/three.js"></script>
     <script>
       // Cargar componentes dinámicamente
+      fetch("components/portada.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("portada").innerHTML = html));
+      fetch("components/inicio.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("inicio").innerHTML = html));
       fetch("components/header.html")
         .then((res) => res.text())
         .then((html) => (document.getElementById("header").innerHTML = html));
-      fetch("components/menu.html")
-        .then((res) => res.text())
-        .then((html) => (document.getElementById("menu").innerHTML = html));
       fetch("components/footer.html")
         .then((res) => res.text())
         .then((html) => (document.getElementById("footer").innerHTML = html));
       fetch("components/reservas.html")
         .then((res) => res.text())
         .then((html) => (document.getElementById("reservas").innerHTML = html));
+      fetch("components/testimonials.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("testimonios").innerHTML = html)
+        );
+      fetch("components/gallery.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("galeria").innerHTML = html));
+      fetch("components/membership.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("membership").innerHTML = html)
+        );
+      fetch("components/login.html")
+        .then((res) => res.text())
+        .then(
+          (html) => (document.getElementById("inicio-sesion").innerHTML = html)
+        );
       fetch("components/ubicacion.html")
         .then((res) => res.text())
         .then(

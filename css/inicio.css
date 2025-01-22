@@ -1,0 +1,48 @@
+/* Hero Section */
+.hero {
+    position: relative;  /* Agregado para mantener consistencia con portada */
+    height: 100dvh;      /* Cambiado de min-height a height */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url("../images/hero-bg.jpg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;        /* Agregado para mantener consistencia */
+}
+
+.hero-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 300;
+    max-width: 800px;
+}
+
+/* Opcional: agregar estado oculto como en portada */
+.hero.hidden {
+    display: none;
+}
+
+/* Media queries para mantener consistencia con portada */
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,29 @@
+/* Portada */
+.portada {
+  position: relative;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  z-index: 1;
+}
+
+.portada.hidden {
+  display: none;
+}
+
+.logo-portada {
+  width: 200px;
+}
+
+/* Media queries adicionales */
+@media (max-width: 480px) {
+  .logo-portada {
+    width: clamp(120px, 40vw, 150px);
+  }
+
+  .form-group {
+    margin-bottom: 0.8rem;
+  }
+}
