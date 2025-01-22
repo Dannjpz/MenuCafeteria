@@ -3,13 +3,17 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: var(--secondary-color);
+  background-color: #1c1c1c; /* Cambiado */
   color: white;
   z-index: 1000;
   padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(28, 28, 28, 0.1); /* Cambiado */
   display: none;
+  background-image: radial-gradient(circle at center, rgba(28, 28, 28, 0.5), rgba(28, 28, 28, 0.9)), url("/images/back.png");
+  background-size: cover;
+  background-position: center;
 }
+
 .nav-container {
   margin: 0 auto;
   display: flex;
@@ -25,12 +29,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  background: rgba(
-    0,
-    0,
-    0,
-    0.95
-  ); 
+  background: rgba(28, 28, 28, 0.95); /* Cambiado */
   position: fixed;
   top: 0;
   left: -100%;
@@ -40,17 +39,16 @@
   justify-content: center;
   align-items: center;
   transition: left 0.3s ease-in-out;
-  z-index: 1000; /* Asegura que esté por encima del contenido */
-  pointer-events: auto; /* Asegura que sea interactivo */
+  z-index: 1000;
+  pointer-events: auto;
   text-align: center;
 }
 
 .nav-menu.active {
   left: 0;
-  pointer-events: auto; /* Asegura que los clicks funcionen */
+  pointer-events: auto;
 }
 
-/* Opcional: Añadir un overlay para oscurecer el fondo cuando el menú está activo */
 .nav-menu::before {
   content: "";
   position: fixed;
@@ -58,7 +56,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0);
+  background: rgba(28, 28, 28, 0); /* Cambiado */
   z-index: -1;
 }
 
@@ -76,13 +74,13 @@
 
 .nav-menu a:hover {
   background-color: #b08d57;
-  color: black;
+  color: #1c1c1c; /* Cambiado */
 }
 
 .menu-toggle {
   display: block;
   cursor: pointer;
-  position: fixed; /* Cambiado de absolute a fixed */
+  position: fixed;
   right: 20px;
   font-size: 24px;
   z-index: 1010;
@@ -105,6 +103,9 @@
 
   .nav-container {
     padding: 1rem 2rem;
+    /* Centramos el contenido */
+    justify-content: center;
+    text-align: center;
   }
 
   .nav-menu {

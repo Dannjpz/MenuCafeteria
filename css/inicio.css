@@ -1,13 +1,15 @@
 /* Hero Section */
 .hero {
-    position: relative;  /* Agregado para mantener consistencia con portada */
-    height: 100dvh;      /* Cambiado de min-height a height */
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        url("../images/hero-bg.jpg") center/cover no-repeat;
+    position: relative;
+    height: 110dvh;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;        /* Agregado para mantener consistencia */
+    background-image: url("/images/back3.png");
+    background-size: cover;  /* Para que la imagen cubra todo el contenedor */
+    background-position: center;  /* Centra la imagen */
+    background-repeat: no-repeat;  /* Evita que la imagen se repita */
+    z-index: 1;
 }
 
 .hero-content {
