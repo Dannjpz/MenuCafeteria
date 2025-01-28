@@ -9,9 +9,10 @@
     <title>Tu Restaurante</title>
     <!-- Archivos CSS -->
     <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="css/gallery.css" />
+    <!-- <link rel="stylesheet" href="css/gallery.css" /> -->
     <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="css/inicio.css" />
+    <link rel="stylesheet" href="css/ar-menu.css" />
     <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/membership.css" />
     <link rel="stylesheet" href="css/portada.css" />
@@ -36,13 +37,9 @@
     <div id="portada"></div>
     <div id="header"></div>
     <div id="inicio"></div>
-    <section class="section" id="menu">
-      <h2 class="section-title">Explora nuestro menú en AR</h2>
-      <p style="text-align: center">Haz clic para ver en realidad aumentada.</p>
-      <div id="3d-container"></div>
-    </section>
+    <div id="menu"></div>
     <div id="testimonios"></div>
-    <div id="galeria"></div>
+    <!-- <div id="galeria"></div> -->
     <div id="reservas"></div>
     <div id="membership"></div>
     <div id="inicio-sesion"></div>
@@ -69,14 +66,20 @@
       fetch("components/reservas.html")
         .then((res) => res.text())
         .then((html) => (document.getElementById("reservas").innerHTML = html));
+      fetch("components/ar-menu.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("menu").innerHTML = html;
+          initializeARMenu();
+        });
       fetch("components/testimonials.html")
         .then((res) => res.text())
         .then(
           (html) => (document.getElementById("testimonios").innerHTML = html)
         );
-      fetch("components/gallery.html")
-        .then((res) => res.text())
-        .then((html) => (document.getElementById("galeria").innerHTML = html));
+      // fetch("components/gallery.html")
+      // .then((res) => res.text())
+      // .then((html) => (document.getElementById("galeria").innerHTML = html));
       fetch("components/membership.html")
         .then((res) => res.text())
         .then(

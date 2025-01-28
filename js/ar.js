@@ -1,108 +1,117 @@
-
-function isIOS() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-}
-
-function isAndroid() {
-  return /Android/.test(navigator.userAgent);
-}
-
-const models = [
+const menuItems = [
   {
-    ios: "./images/pizzaPeperoni.usdz",
-    androidAR: "./models/taco.glb",
-    androidWeb: "./models/taco_0.4_draco.glb",
-    fallback: "./images/pizza.jpg",
+    id: 1,
+    name: "Pizza Peperoni",
+    price: "$159",
+    category: "pizzas",
+    description:
+      "Deliciosa pizza con peperoni, queso mozzarella y salsa de tomate",
+    models: {
+      ios: "./images/pizzaPeperoni.usdz",
+      androidAR: "./models/pizza.glb",
+      androidWeb: "./models/pizza_0.4_draco.glb",
+      fallback: "./images/pizza.jpg"
+    }
   },
   {
-    ios: "./images/pizzaPeperoni.usdz",
-    androidAR: "./models/taco2.glb",
-    androidWeb: "./models/taco_0.4_draco2.glb",
-    fallback: "./images/pizza2.jpg",
-  },
+    id: 2,
+    name: "Tacos al Pastor",
+    price: "$89",
+    category: "tacos",
+    description: "Tacos tradicionales con carne al pastor, piña y cilantro",
+    models: {
+      ios: "./images/tacos.usdz",
+      androidAR: "./models/taco.glb",
+      androidWeb: "./models/taco_0.4_draco.glb",
+      fallback: "./images/taco.jpg"
+    }
+  }
 ];
 
-const container = document.getElementById("3d-container");
+function createMenuItem(item) {
+  const menuItem = document.createElement("div");
+  menuItem.className = "menu-item";
+  menuItem.dataset.category = item.category;
 
-// Función para crear contenido para cada modelo
-function createModelViewer(model) {
-  if (isIOS()) {
-    const link = document.createElement("a");
-    link.setAttribute("rel", "ar");
-    link.setAttribute("href", model.ios);
+  const content = `
+    <model-viewer
+      src="${item.models.androidAR}"
+      ios-src="${item.models.ios}"
+      ar
+      ar-modes="scene-viewer quick-look"
+      camera-controls
+      auto-rotate
+      camera-orbit="0deg 75deg 0.7m"
+      min-camera-orbit="auto auto 0.5m"
+      max-camera-orbit="auto auto 2m"
+      style="width: 100%; height: 150px"
+    ></model-viewer>
+    <div class="menu-item-content">
+      <h3 class="menu-item-title">${item.name}</h3>
+      <p class="menu-item-price">${item.price}</p>
+      <p class="menu-item-description">${item.description}</p>
+    </div>
+  `;
 
-    const previewImage = document.createElement("img");
-    previewImage.alt = "Ver modelo en AR";
-    previewImage.src = model.fallback;
-    previewImage.style.width = "300px";
-    previewImage.style.cursor = "pointer";
-
-    link.appendChild(previewImage);
-
-    const message = document.createElement("p");
-    message.textContent =
-      "Haz clic en la imagen para ver el modelo en realidad aumentada";
-    message.style.textAlign = "center";
-
-    container.appendChild(link);
-    container.appendChild(message);
-  } else if (isAndroid()) {
-    console.log(
-      "Dispositivo Android detectado. Cargando modelo en segundo plano..."
-    );
-
-    fetch(model.androidWeb)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const objectURL = URL.createObjectURL(blob);
-
-        // Crear <model-viewer> para el modelo
-        const viewer = document.createElement("model-viewer");
-        viewer.setAttribute("src", objectURL);
-        viewer.setAttribute("poster", model.fallback);
-        viewer.setAttribute("ar", "");
-        viewer.setAttribute("auto-rotate", "");
-        viewer.setAttribute("camera-controls", "");
-        viewer.setAttribute("reveal", "auto");
-        viewer.setAttribute("loading", "eager");
-        viewer.setAttribute("ar-modes", "scene-viewer webxr quick-look");
-        viewer.setAttribute("ar-scale", "auto");
-        viewer.setAttribute("ar-src", model.androidAR);
-
-        viewer.style.width = "100%";
-        viewer.style.height = "250px";
-
-        container.appendChild(viewer);
-      })
-      .catch((error) => {
-        console.error("Error al cargar el modelo:", error);
-
-        const fallbackImage = document.createElement("img");
-        fallbackImage.src = model.fallback;
-        fallbackImage.alt = "Vista previa del producto";
-        fallbackImage.style.width = "300px";
-        fallbackImage.style.display = "block";
-        fallbackImage.style.margin = "0 auto";
-        container.appendChild(fallbackImage);
-      });
-
-  } else {
-    const fallbackImage = document.createElement("img");
-    fallbackImage.src = model.fallback;
-    fallbackImage.alt = "Vista previa del producto";
-    fallbackImage.style.width = "300px";
-    fallbackImage.style.display = "block";
-    fallbackImage.style.margin = "0 auto";
-
-    const message = document.createElement("p");
-    message.textContent =
-      "La visualización interactiva no está disponible en este dispositivo.";
-    message.style.textAlign = "center";
-
-    container.appendChild(fallbackImage);
-    container.appendChild(message);
-  }
+  menuItem.innerHTML = content;
+  return menuItem;
 }
 
-// Generar contenido para todos los modelos
-models.forEach((model) => createModelViewer(model));
+// Filtrado por categorías
+document.querySelectorAll(".category-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    const category = button.dataset.category;
+
+    // Actualizar botones activos
+    document
+      .querySelectorAll(".category-btn")
+      .forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+
+    // Filtrar items
+    document.querySelectorAll(".menu-item").forEach(item => {
+      if (category === "todos" || item.dataset.category === category) {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  });
+});
+
+// Inicializar el menú
+const container = document.getElementById("3d-container");
+menuItems.forEach(item => {
+  container.appendChild(createMenuItem(item));
+});
+
+function initializeARMenu() {
+  const container = document.getElementById("3d-container");
+  menuItems.forEach(item => {
+    container.appendChild(createMenuItem(item));
+  });
+
+  // Agregar event listeners a los botones de categoría
+  document.querySelectorAll(".category-btn").forEach(button => {
+    button.addEventListener("click", filterMenuByCategory);
+  });
+}
+
+function filterMenuByCategory(event) {
+  const category = event.target.dataset.category;
+
+  // Actualizar botones activos
+  document
+    .querySelectorAll(".category-btn")
+    .forEach(btn => btn.classList.remove("active"));
+  event.target.classList.add("active");
+
+  // Filtrar elementos del menú
+  document.querySelectorAll(".menu-item").forEach(item => {
+    if (category === "todos" || item.dataset.category === category) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}

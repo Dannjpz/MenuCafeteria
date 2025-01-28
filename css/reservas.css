@@ -1,6 +1,13 @@
 /* Formulario de reservas */
+.reservas-section {
+  padding: clamp(3rem, 8vw, 5rem) 1rem;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .reservation-form {
-    max-width: min(600px, 90%);
-    margin: 0 auto;
-    padding: clamp(1rem, 3vw, 2rem);
-  }
+  max-width: min(600px, 90%);
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2rem);
+}

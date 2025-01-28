@@ -5,6 +5,7 @@ footer {
     padding: clamp(1.5rem, 4vw, 2rem) 1rem;
     text-align: center;
     font-size: 0.9rem;
+    transition: height 0.5s ease, background-color 0.5s ease;
   }
   
   .footer-content {
