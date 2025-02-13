@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadComponent("components/footer.html", "footer"),
     loadComponent("components/reservas.html", "reservas"),
     loadComponent("components/testimonials.html", "testimonios"),
-    loadComponent("components/gallery.html", "galeria"),
     loadComponent("components/membership.html", "membership"),
     loadComponent("components/login.html", "inicio-sesion"),
     loadComponent("components/ubicacion.html", "ubicacion"),

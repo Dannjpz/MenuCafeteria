@@ -1,74 +1,100 @@
-const express = require('express');
-const oracledb = require('oracledb');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+const oracledb = require("oracledb");
+const { initialize } = require("./db");
 
-// Configuración de la base de datos
-const dbConfig = {
-  user: 'DannJpz',
-  password: 'dev', 
-  connectString: 'localhost:1521/xe',
-};
-
-// Crear una aplicación Express
 const app = express();
 const port = 3000;
 
-app.use(cors());
-app.use(express.json()); // Para parsear JSON en el cuerpo de las solicitudes
+// Configuración de CORS más específica
+app.use(
+  cors({
+    origin: ["http://127.0.0.1:5500", "http://localhost:5500"], // Agrega los orígenes permitidos
+    methods: ["POST", "GET", "OPTIONS"],
+    credentials: true
+  })
+);
 
-// Ruta para procesar la reserva
-app.post('/reservar', async (req, res) => {
+app.use(express.json());
+
+// Middleware para logging de requests
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
+app.post("/api/reservations", async (req, res) => {
+  console.log("Recibida nueva solicitud de reserva:", req.body);
+
   let connection;
-
   try {
-    // Conectar a la base de datos
-    connection = await oracledb.getConnection(dbConfig);
-    console.log('Conectado a la base de datos');
+    const {
+      name,
+      email,
+      reservation_date,
+      reservation_time,
+      people,
+      special_requests
+    } = req.body;
 
-    const { name, email, reservation_date, reservation_time, people } = req.body;
-
-    // Depurar datos recibidos
-    console.log('Datos recibidos:', req.body);
-
-    // Insertar datos en la tabla reservations
-    const query = `
-      INSERT INTO reservations (name, email, reservation_date, reservation_time, people)
-      VALUES (:name, :email, TO_DATE(:reservation_date, 'YYYY-MM-DD'), TO_TIMESTAMP(:reservation_time, 'HH24:MI:SS'), :people)
-    `;
-
-    const binds = {
-      name: name,
-      email: email,
-      reservation_date: reservation_date,
-      reservation_time: reservation_time,
-      people: people
-    };
-
-    // Ejecutar la consulta
-    const result = await connection.execute(query, binds, { autoCommit: true });
-
-    console.log('Reserva insertada:', result);
-    res.status(200).send('Reserva procesada exitosamente');
-  } catch (error) {
-    console.error('Error al procesar la reserva:', error);
-    
-    if (error.code === 'ORA-00942') {
-      res.status(500).send('Error: La tabla o vista no existe');
-    } else {
-      res.status(500).send('Error al procesar la reserva');
+    // Validación básica
+    if (!name || !email || !reservation_date || !reservation_time || !people) {
+      throw new Error("Faltan campos requeridos");
     }
+
+    connection = await oracledb.getConnection();
+
+    const result = await connection.execute(
+      `INSERT INTO reservations (
+                name, email, reservation_date, reservation_time, people, special_requests
+            ) VALUES (
+                :name, :email, TO_DATE(:reservation_date, 'YYYY-MM-DD'),
+                TO_TIMESTAMP(:reservation_time, 'HH24:MI'),
+                :people, :special_requests
+            ) RETURNING id INTO :id`,
+      {
+        name,
+        email,
+        reservation_date,
+        reservation_time,
+        people,
+        special_requests,
+        id: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }
+      },
+      { autoCommit: true }
+    );
+
+    console.log("Reserva creada exitosamente:", result.outBinds.id[0]);
+
+    res.status(201).json({
+      success: true,
+      message: "Reserva creada exitosamente",
+      id: result.outBinds.id[0]
+    });
+  } catch (err) {
+    console.error("Error al crear la reserva:", err);
+    res.status(500).json({
+      success: false,
+      message: "Error al procesar la reserva: " + err.message
+    });
   } finally {
     if (connection) {
       try {
         await connection.close();
       } catch (err) {
-        console.error('Error al cerrar la conexión:', err);
+        console.error("Error al cerrar la conexión:", err);
       }
     }
   }
 });
 
-// Iniciar el servidor
-app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
-});
+initialize()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Servidor corriendo en http://localhost:${port}`);
+    });
+  })
+  .catch(err => {
+    console.error("Error al inicializar la base de datos:", err);
+    process.exit(1);
+  });

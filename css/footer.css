@@ -1,17 +1,17 @@
 /* Footer */
 footer {
-    background: var(--secondary-color);
-    color: white;
-    padding: clamp(1.5rem, 4vw, 2rem) 1rem;
-    text-align: center;
-    font-size: 0.9rem;
-    transition: height 0.5s ease, background-color 0.5s ease;
-  }
-  
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: clamp(1.5rem, 4vw, 2rem);
-  }
+  background-image: url("/images/back3.png");
+  color: white;
+  padding: clamp(1.5rem, 4vw, 2rem) 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: height 0.5s ease, background-color 0.5s ease;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: clamp(1.5rem, 4vw, 2rem);
+}

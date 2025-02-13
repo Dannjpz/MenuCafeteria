@@ -1,16 +1,23 @@
-<div class="ar-menu-container">
+<div class="ar-menu-container" id="ar-menu-container">
   <div class="ar-menu-header">
-    <h1 class="section-title">Explora nuestro menú en AR</h1>
-    <p class="ar-menu-subtitle">
-      Descubre nuestros platillos en realidad aumentada
-    </p>
+    <h1 class="section-title">Menu</h1>
+    <p class="ar-menu-subtitle">Descubre nuestros inovadores platillos</p>
   </div>
   <div class="ar-menu-categories">
-    <button class="category-btn active" data-category="todos">Todos</button>
-    <button class="category-btn" data-category="pizzas">Pizzas</button>
-    <button class="category-btn" data-category="tacos">Tacos</button>
+    <div class="categories-wrapper">
+      <button class="category-btn active" data-category="entradas">
+        Entradas y Aperitivos
+      </button>
+      <button class="category-btn" data-category="fuertes">
+        Platos Fuertes
+      </button>
+      <button class="category-btn" data-category="acompañamientos">
+        Acompañamientos y Guarniciones
+      </button>
+      <button class="category-btn" data-category="postres">Postres</button>
+      <button class="category-btn" data-category="bebidas">Bebidas</button>
+      <!-- <button class="category-btn active" data-category="todos">Todos</button> -->
+    </div>
   </div>
-  <div class="ar-menu-grid" id="3d-container">
-    <!-- Aquí se inyectan los modelos dinámicamente -->
-  </div>
+  <div class="ar-menu-grid" id="3d-container"></div>
 </div>

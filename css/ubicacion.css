@@ -8,6 +8,7 @@
     background-color: #f5f5f5;
     z-index: 1;
     padding: 1rem;
+    background-image: url("/images/back3.png");
   }
   
   .location-content {
