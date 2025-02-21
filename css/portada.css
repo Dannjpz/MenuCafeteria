@@ -10,7 +10,7 @@
   background-size: cover;  /* Para que la imagen cubra todo el contenedor */
   background-position: center;  /* Centra la imagen */
   background-repeat: no-repeat;  /* Evita que la imagen se repita */
-  z-index: 1;
+  z-index: 100;
 }
 
 .portada.hidden {
