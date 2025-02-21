@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   /*background-image: url("/images/back.png");*/
-  background-image: url("https://dannjpz.github.io/MenuCafeteria/images/back.png");
+  background-image: url("https://dannjpz.github.io/MenuCafeteria/images/back.png") !important;
   background-size: cover;  /* Para que la imagen cubra todo el contenedor */
   background-position: center;  /* Centra la imagen */
   background-repeat: no-repeat;  /* Evita que la imagen se repita */
