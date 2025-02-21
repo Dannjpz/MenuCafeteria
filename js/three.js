@@ -1,11 +1,23 @@
 // Archivo js/three.js
-import { WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, MeshBasicMaterial, Mesh } from "three";
+import {
+  WebGLRenderer,
+  Scene,
+  PerspectiveCamera,
+  BoxGeometry,
+  MeshBasicMaterial,
+  Mesh
+} from "three";
 
 // Crear la escena
 const scene = new Scene();
 
 // Crear la cámara
-const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 camera.position.z = 5;
 
 // Crear el renderizador

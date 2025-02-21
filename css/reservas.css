@@ -149,3 +149,9 @@
     padding: 1.5rem;
   }
 }
+
+@media (min-width: 769px) {
+  .reserva {
+    background-image: url("/images/back3.png");
+  }
+}

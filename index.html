@@ -36,20 +36,18 @@
   <body>
     <div id="portada"></div>
     <div id="header"></div>
-    3
     <div id="inicio"></div>
     <div id="menu"></div>
     <!-- <div id="galeria"></div> -->
-    <div id="reservas"></div>
-    <div id="membership"></div>
-    <div id="inicio-sesion"></div>
+    <div class="reserva" id="reservas"></div>
+    <!-- <div id="membership"></div> -->
+    <!-- <div id="inicio-sesion"></div> -->
     <div id="ubicacion"></div>
     <div id="testimonios"></div>
     <div id="footer"></div>
     <!-- Scripts -->
-    <script src="js/main.js"></script>
     <script src="js/ar.js"></script>
-    <script src="js/three.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/reservations.js"></script>
     <script>
       // Cargar componentes dinámicamente
@@ -82,16 +80,16 @@
       // fetch("components/gallery.html")
       // .then((res) => res.text())
       // .then((html) => (document.getElementById("galeria").innerHTML = html));
-      fetch("components/membership.html")
-        .then((res) => res.text())
-        .then(
-          (html) => (document.getElementById("membership").innerHTML = html)
-        );
-      fetch("components/login.html")
-        .then((res) => res.text())
-        .then(
-          (html) => (document.getElementById("inicio-sesion").innerHTML = html)
-        );
+      // fetch("components/membership.html")
+      //   .then((res) => res.text())
+      //   .then(
+      //     (html) => (document.getElementById("membership").innerHTML = html)
+      //   );
+      // fetch("components/login.html")
+      //   .then((res) => res.text())
+      //   .then(
+      //     (html) => (document.getElementById("inicio-sesion").innerHTML = html)
+      //   );
       fetch("components/ubicacion.html")
         .then((res) => res.text())
         .then(
